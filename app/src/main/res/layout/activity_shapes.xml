@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_shape_bg"
+    tools:context=".Activities.GeoShapes.ShapesActivity">
+
+    <!-- Back Arrow -->
+
+    <ImageView
+        android:id="@+id/gotoBackActivity"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_backarrow"
+        android:layout_margin="16dp"
+        android:onClick="onClickBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="6dp"/>
+
+
+    <!-- End -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shapes_recycler_secondary"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/shapes_recycler_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gotoBackActivity" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shapes_recycler_primary"
+        android:layout_width="0dp"
+        android:elevation="32dp"
+        android:background="@drawable/gradient_shape_bg"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/welcomeScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/shapes_recycler_secondary"
+        app:layout_constraintEnd_toEndOf="@+id/shapes_recycler_secondary"
+        app:layout_constraintStart_toStartOf="@+id/shapes_recycler_secondary"
+        app:layout_constraintVertical_bias="0"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        android:visibility="gone"
+        app:lottie_rawRes="@raw/panda" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

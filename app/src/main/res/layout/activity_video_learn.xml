@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorMain"
+    tools:context=".Activities.VideoLearnActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="6dp"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+
+            <ImageView
+                android:id="@+id/imgBackButton"
+                android:layout_width="45.0dip"
+                android:layout_height="45.0dip"
+                android:layout_centerVertical="true"
+                android:layout_margin="5.0dip"
+                android:src="@drawable/ic_backarrow"
+                android:onClick="onClickBack" />
+
+            <TextView
+                android:id="@+id/txtTitleSubHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Learning From Video Song"
+                android:textColor="@color/colorText"
+                android:fontFamily="@font/avenir_black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVideoCategory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="5dp" />
+
+
+</LinearLayout>

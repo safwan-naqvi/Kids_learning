@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.kidsappfyp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:configChanges="uiMode"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.KidsAppFYP">
+        <activity
+            android:name=".Testing.QuizSpokenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.ResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Testing.TestingMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KidsAppFYP.NoActionBarAndStatusBar"></activity>
+        <activity
+            android:name=".Activities.Urdu.UrduActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Animals.AnimalsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Vegetables.VegetableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Vegetables.FruitsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.Colors.ColorsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.GeoShapes.ShapesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Numbers.NumbersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.VocalsAlphabet.VocalAndLetterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.VideoLearning.VideoPlayActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".Activities.VideoLearning.ListVideoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.VideoLearnActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Dashboard.DashboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Intro.IntroActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.KidsAppFYP.NoActionBarAndStatusBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name_desc">Best Virtual Teacher</string>
+    <string name="welcome">Welcome To!</string>
+    <string name="intro_screen">Introductory Screen</string>
+    <string name="default_web_client_id">769774337907-til1tvok9jov9gvatdp81mr43mlsppgv.apps.googleusercontent.com</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="circle">A circle is a round shaped figure that has no corners or edges.</string>
+    <string name="triangle">A triangle is a polygon with three edges and three vertices.</string>
+    <string name="rhombus">Rhombus is a special type of a parallelogram whose all sides are equal</string>
+    <string name="heart">Heart is a shape used to express the idea of the heart and love in a metaphorical sense.</string>
+    <string name="pentagon">"A pentagon is a flat 2D shape that has five sides and five vertices. "</string>
+    <string name="star">This is called a pentagram and this is the simplest regular star polygon.</string>
+    <string name="square">a plane figure with four equal sides and four right (90°) angles</string>
+    <string name="rectangle">A rectangle is a type of quadrilateral, whose opposite sides are equal and parallel</string>
+</resources>

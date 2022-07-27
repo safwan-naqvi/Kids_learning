@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llShape"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/shape_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/triangle"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:id="@+id/shape_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_margin="16dp"
+        android:textSize="32sp"
+        android:fontFamily="@font/crayone"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/shape_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Triangle"
+        android:fontFamily="@font/avenir"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_margin="32dp" />
+
+</LinearLayout>
