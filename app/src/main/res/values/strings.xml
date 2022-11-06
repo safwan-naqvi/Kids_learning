@@ -16,6 +16,10 @@
     <string name="star">This is called a pentagram and this is the simplest regular star polygon.</string>
     <string name="square">a plane figure with four equal sides and four right (90°) angles</string>
     <string name="rectangle">A rectangle is a type of quadrilateral, whose opposite sides are equal and parallel</string>
+    <string name="about_us">About Us</string>
+    <string name="about_us_data">Kids Learning App is an AI Based Interactive Application for Kids age of 6 or less, Our Motive is to teach students and help them learn in their early stages with clear concepts.!</string>
+    <string name="share_subject">Hey buddy! Try Kids Learning App</string>
+    <string name="share_using">Share With Your Friends Through</string>
 
     <array name="colors">
         <item>@color/red</item>
@@ -36,6 +40,7 @@
         <item>@color/black</item>
         <item>@color/white</item>
     </array>
+
     <array name="colorNames">
         <item>RED</item>
         <item>PINK</item>

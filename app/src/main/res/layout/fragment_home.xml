@@ -12,10 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-100dp"
-        android:layout_marginRight="-60dp"
+        android:layout_marginRight="-70dp"
         android:src="@drawable/bg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorButtonPrimary" />
 
 
     <!-- End Background Elements -->
@@ -24,8 +25,8 @@
         android:id="@+id/user_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_28sdp"
         android:elevation="6dp"
         android:fontFamily="@font/avenir_black"
         android:text=""
@@ -74,18 +75,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/user_mode_switch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/avenir_black"
-        android:text="Test Mode"
-        android:layout_marginRight="16dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/user_profile_image" />
 
 
     <ScrollView
@@ -256,7 +245,7 @@
                         android:id="@+id/imUrdu"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/number"
+                        android:src="@drawable/abjeem"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"

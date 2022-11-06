@@ -86,46 +86,25 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="12dp"
-        android:src="@drawable/broccolli"
+        android:src="@drawable/placehold"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="@+id/view5"
         app:layout_constraintStart_toStartOf="@+id/view5"
         app:layout_constraintTop_toBottomOf="@+id/question" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toBottomOf="@+id/view5"
-        app:srcCompat="@drawable/fiftyfiftyline" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view5"
-        app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintTop_toBottomOf="@+id/view5"
-        app:srcCompat="@drawable/audiencepoll" />
 
     <TextView
         android:id="@+id/option_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/option_unselected"
         android:onClick="onClick"
-        android:padding="15dp"
+        android:padding="@dimen/_15sdp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/view5"
         app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <TextView
         android:id="@+id/option_2"
@@ -173,7 +152,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/button_2"
         android:onClick="onClick"
-        android:text="Hand Gesture Test"
+        android:text="Next Question"
         android:textColor="@color/color_white"
         app:layout_constraintEnd_toEndOf="@+id/quizBtn"
         app:layout_constraintHorizontal_bias="0.5"

@@ -234,6 +234,12 @@ public class NumbersActivity extends AppCompatActivity {
     }
 //endregion
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     public void onClickBack(View view) {
         finish();
     }

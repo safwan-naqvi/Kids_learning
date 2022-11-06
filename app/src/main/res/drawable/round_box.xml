@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/darkSlate">
+    android:color="#2196F3">
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
-            <solid android:color="@color/grey" />
+            <solid android:color="#3F51B5" />
             <corners android:topLeftRadius="15dp"
                 android:bottomLeftRadius="15dp"/>
         </shape>
@@ -13,8 +13,8 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="90"
-                android:endColor="@color/white"
-                android:startColor="#F1F5FA"
+                android:endColor="@color/light_grey"
+                android:startColor="@color/colorWhite"
                 android:type="linear" />
             <corners android:topLeftRadius="15dp"
                 android:bottomLeftRadius="15dp"/>

@@ -113,6 +113,7 @@ public class VocalAndLetterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
+        finish();
     }
 }

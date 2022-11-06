@@ -7,17 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.kidsappfyp.Activities.Numbers.NumberSecondaryAdapter;
 import com.example.kidsappfyp.Activities.Numbers.NumbersAdapter;
 import com.example.kidsappfyp.Activities.Numbers.NumbersSecondaryModel;
 import com.example.kidsappfyp.R;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,9 @@ public class ShapesActivity extends AppCompatActivity {
     private List<ShapesModel> ShapesList;
     ShapesAdapterSecondary shapesAdapterSecondary;
     LottieAnimationView lottieAnimationView;
+
+    private SharedPreferences sharedPreferences;
+    SharedPreferences.Editor myEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,7 @@ public class ShapesActivity extends AppCompatActivity {
         // The value will be default as empty string because for
         // the very first time when the app is opened, there is nothing to show
         Boolean flag = sh.getBoolean("display", false);
-        mediaPlayer = MediaPlayer.create(this, R.raw.numbers);
+        mediaPlayer = MediaPlayer.create(this, R.raw.shape_learn);
         mediaPlayer.setLooping(false);
         mediaPlayer.setVolume(1, 1);
         if (flag) {
@@ -72,6 +79,75 @@ public class ShapesActivity extends AppCompatActivity {
             lottieAnimationView.setVisibility(View.GONE);
         }
 
+
+        sharedPreferences = getSharedPreferences("ShapesWalkThrough",MODE_PRIVATE);
+        myEdit = sharedPreferences.edit();
+        String walk = sharedPreferences.getString("show","on");
+        //region Shapes WalkThrough
+        if(walk.equals("on")){
+            myEdit.putString("show", "off");
+            myEdit.commit();
+            new TapTargetSequence(this)
+                    .targets(
+                            TapTarget.forView(findViewById(R.id.button_shape), "Firstly Choose Shape", "You need to select the Shape You Want to know about.")
+                                    // All options below are optional
+                                    .outerCircleColor(R.color.colorButtonSecondary)      // Specify a color for the outer circle
+                                    .outerCircleAlpha(0.90f)            // Specify the alpha amount for the outer circle
+                                    .targetCircleColor(R.color.white)   // Specify a color for the target circle
+                                    .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                    .titleTextColor(R.color.white)      // Specify the color of the title text
+                                    .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                                    .descriptionTextColor(R.color.white)  // Specify the color of the description text
+                                    .textColor(R.color.colorMain)            // Specify a color for both the title and description text
+                                    .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                                    .dimColor(R.color.black)
+                                    .titleTextSize(24)
+                                    .descriptionTextSize(18)// If set, will dim behind the view with 30% opacity of the given color
+                                    .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                    .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                    .tintTarget(true)
+                                    .icon(getDrawable(R.drawable.one))  // Whether to tint the target view's color
+                                    .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+                                    .targetRadius(60),                  // Specify the target radius (in dp)
+                            TapTarget.forView(findViewById(R.id.button_shape_Name), "Secondly Click Here", "Now Clicking here will speak out the Description of Shapes.")
+                                    // All options below are optional
+                                    .outerCircleColor(R.color.appBlueTrans)      // Specify a color for the outer circle
+                                    .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+                                    .targetCircleColor(R.color.white)   // Specify a color for the target circle
+                                    .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                                    .titleTextColor(R.color.white)      // Specify the color of the title text
+                                    .descriptionTextSize(10)
+                                    .titleTextSize(24)
+                                    .descriptionTextSize(18)// Specify the size (in sp) of the description text
+                                    .descriptionTextColor(R.color.white)  // Specify the color of the description text
+                                    .textColor(R.color.colorWhite)            // Specify a color for both the title and description text
+                                    .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+                                    .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                                    .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                    .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                    .tintTarget(true)                   // Whether to tint the target view's color
+                                    .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+                                    .icon(getDrawable(R.drawable.two))                     // Specify a custom drawable to draw as the target
+                                    .targetRadius(60)).listener(new TapTargetSequence.Listener() {
+                        @Override
+                        public void onSequenceFinish() {
+                            Toast.makeText(context, "Well done", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                            Toast.makeText(context, "One Step More", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onSequenceCanceled(TapTarget lastTarget) {
+
+                        }
+                    }).start();
+
+
+        }
+        //endregion
 
         //endregion
         setRvAdapter();
@@ -142,6 +218,12 @@ public class ShapesActivity extends AppCompatActivity {
         mediaPlayer.pause();
     }
 //endregion
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     public void onClickBack(View view) {
         finish();

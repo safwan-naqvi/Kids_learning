@@ -92,12 +92,13 @@ public class ColorsActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBack(View view) {
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
+    }
+
+    public void onClickBack(View view) {
         finish();
     }
 

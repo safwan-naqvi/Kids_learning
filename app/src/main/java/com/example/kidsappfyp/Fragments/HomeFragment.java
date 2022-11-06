@@ -60,7 +60,7 @@ import java.util.Map;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     //region Initializing
-    TextView userName, points, switchMode;
+    TextView userName, points;
     CircularImageView userProfileImage;
     CardView optionAlphabet, optionNumber, optionShape, optionAnimal, optionFnV, optionVeg, optionColor, optionVideoLearn, optionUrdu;
 
@@ -95,7 +95,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         userName = view.findViewById(R.id.user_profile_name);
         userProfileImage = view.findViewById(R.id.user_profile_image);
         points = view.findViewById(R.id.user_points);
-        switchMode = view.findViewById(R.id.user_mode_switch);
         //region init CardViews
 
         optionAlphabet = view.findViewById(R.id.option_letters);
@@ -129,17 +128,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         CommonHelper.userGender = value.getString("gender");
                         CommonHelper.userEmail = value.getString("email");
                         CommonHelper.userScore = (long) value.get("score");
-                        changeData();
+                        changeData(value.getString("profile"));
                     } else {
                         Log.i("appCheck", "Current data: null ");
                     }
                     if (value.getMetadata().hasPendingWrites()) {
-                        changeData();
+                        changeData(value.getString("profile"));
                     }
 
                 }
             }
         });
+
 
         optionAlphabet.setOnClickListener(this::onClick);
         optionAnimal.setOnClickListener(this::onClick);
@@ -151,13 +151,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         optionColor.setOnClickListener(this::onClick);
         optionUrdu.setOnClickListener(this::onClick);
 
-        switchMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent quiz = new Intent(getContext(), TestingMainActivity.class);
-                startActivity(quiz);
-            }
-        });
 
 
         return view;
@@ -175,11 +168,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
     }
 
-    private void changeData() {
+    private void changeData(String url) {
         if (signInAccount != null) {
             userName.setText(CommonHelper.userName);
             if (getActivity() != null) {
-                Glide.with(getContext()).load(signInAccount.getPhotoUrl())
+                Glide.with(getContext()).load(url) //6 - 11 - 2022 change this from signin user current image
                         .apply(new RequestOptions()
                                 .fitCenter()
                                 .format(DecodeFormat.PREFER_ARGB_8888)

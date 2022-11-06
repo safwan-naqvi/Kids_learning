@@ -54,7 +54,7 @@ public class IntroActivity extends AppCompatActivity {
         //If User Already in firebase so we will not start again login procedure
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SelectionActivity.class);
             startActivity(intent);
             finish();
         }
@@ -157,7 +157,7 @@ public class IntroActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), SelectionActivity.class);
                             startActivity(intent);
                             finish();
                         } else {

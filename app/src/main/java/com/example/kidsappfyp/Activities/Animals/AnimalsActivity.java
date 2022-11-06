@@ -34,6 +34,7 @@ public class AnimalsActivity extends AppCompatActivity {
     private int counter = 0;
 
     private MediaPlayer mediaPlayer;
+
     private int[] sounds;
 
     @Override
@@ -63,7 +64,7 @@ public class AnimalsActivity extends AppCompatActivity {
         next = (Button) findViewById(R.id.next_animals);
 
         counter = Integer.MAX_VALUE / 2;
-
+//2147483647
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,12 +115,13 @@ public class AnimalsActivity extends AppCompatActivity {
         imageItemList.add(new ImageItem("Zebra", R.drawable.zebra));
     }
 
-
-    public void onClickBack(View view) {
-    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
+    }
+
+    public void onClickBack(View view) {
         finish();
     }
 

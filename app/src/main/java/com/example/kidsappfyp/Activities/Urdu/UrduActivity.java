@@ -148,6 +148,13 @@ public class UrduActivity extends AppCompatActivity {
         imageItemList.add(new ImageItem("barri yeh", R.drawable.byah));
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     public void onClickBack(View view) {
+        finish();
     }
 }

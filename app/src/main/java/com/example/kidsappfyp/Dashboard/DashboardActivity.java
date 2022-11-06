@@ -3,6 +3,7 @@ package com.example.kidsappfyp.Dashboard;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -35,12 +37,18 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.example.kidsappfyp.Activities.ProfileActivity;
+import com.example.kidsappfyp.Fragments.AboutUsFragment;
 import com.example.kidsappfyp.Fragments.HomeFragment;
 import com.example.kidsappfyp.HelperClasses.CommonHelper;
 import com.example.kidsappfyp.HelperClasses.DatabaseHelper;
 import com.example.kidsappfyp.HelperClasses.UserHelperClass;
 import com.example.kidsappfyp.Intro.IntroActivity;
 import com.example.kidsappfyp.R;
+import com.example.kidsappfyp.Testing.TestingMainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -112,7 +120,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         //region Shared Preference for handling Music mode
-        sharedPreferences = getSharedPreferences("BGMusic",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("BGMusic", MODE_PRIVATE);
         myEdit = sharedPreferences.edit();
         //endregion
 
@@ -146,6 +154,11 @@ public class DashboardActivity extends AppCompatActivity {
         //region Action Toolbar
         navigationView.setItemIconTintList(null);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            toggle.getDrawerArrowDrawable().setColor(getColor(R.color.colorBlack));
+        } else {
+            toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorBlack));
+        }
         drawerLayout.addDrawerListener(toggle);
         drawerLayout.bringToFront();
         toggle.syncState();
@@ -156,14 +169,14 @@ public class DashboardActivity extends AppCompatActivity {
         View header = navigationView.getHeaderView(0);
         soundMode = header.findViewById(R.id.app_sound_mode);
         //endregion
-
+        mediaPlayer.start();
 
 
         //region TurnSound On/Off
         soundMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 //
+                //
                 if (String.valueOf(soundMode.getTag()) == "Sound") {
                     soundMode.setImageResource(R.drawable.mute);
                     mediaPlayer.pause();
@@ -197,7 +210,6 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
         //endregion
-
         //region Navigation Transfers
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -207,8 +219,33 @@ public class DashboardActivity extends AppCompatActivity {
                     case R.id.menu_home:
                         replaceFragment(new HomeFragment());
                         break;
+                    case R.id.nav_testing:
+                        startActivity(new Intent(DashboardActivity.this, TestingMainActivity.class));
+                        finish();
+                        break;
                     case R.id.nav_leaderboard:
-                        Toast.makeText(getApplicationContext(), "LeaderBoard Activity", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(DashboardActivity.this, TestingMainActivity.class).putExtra("nav_leaderboard", true));
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+                        break;
+                    case R.id.nav_about_us:
+                        replaceFragment(new AboutUsFragment());
+                        break;
+                    case R.id.nav_share:
+                        /*Create an ACTION_SEND Intent*/
+                        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                        /*This will be the actual content you wish you share.*/
+                        String shareBody = "Kids Learning App is a super exciting learning app having interesting features of learning and testing yourself, Do Try Our Application.";
+                        /*The type of the content is text, obviously.*/
+                        intent.setType("text/plain");
+                        /*Applying information Subject and Body.*/
+                        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
+                        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                        /*Fire!*/
+                        startActivity(Intent.createChooser(intent, getString(R.string.share_using)));
+                        break;
+                    case R.id.nav_profile:
+                        startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
                         break;
                     case R.id.nav_logout:
                         mAuth.signOut();
@@ -224,13 +261,10 @@ public class DashboardActivity extends AppCompatActivity {
         });
         navigationView.bringToFront();
         //endregion
-
-
         //endregion
-
-
         replaceFragment(new HomeFragment()); //as default Dashboard
     }
+
 
 
     private void createRequest() {
@@ -245,7 +279,6 @@ public class DashboardActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -254,18 +287,16 @@ public class DashboardActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
         music = sharedPreferences.getString("mode", "off");
-        if(music.equals("off")){
+        if (music.equals("off")) {
             mediaPlayer.pause();
-        }else{
+        } else {
             mediaPlayer.start();
         }
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -284,10 +315,22 @@ public class DashboardActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Closing Activity")
+                    .setMessage("Are you sure you want to close this activity?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     }
-
 
     private void openDialog() {
         dialog.setContentView(R.layout.gender_dialog_box);
@@ -330,7 +373,7 @@ public class DashboardActivity extends AppCompatActivity {
         user.put("email", signInAccount.getEmail());
         user.put("gender", userGender);
         user.put("score", score);
-        user.put("profile",pUrl);
+        user.put("profile", pUrl);
         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -350,6 +393,5 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     }
-
 
 }

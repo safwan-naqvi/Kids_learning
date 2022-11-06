@@ -18,9 +18,10 @@
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#00008577"
+            android:background="#00FAFAF9"
             android:elevation="6dp"
             android:gravity=""
+
             android:minHeight="?attr/actionBarSize"
             android:padding="16dp"
             android:theme="?attr/actionBarTheme"
@@ -37,7 +38,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

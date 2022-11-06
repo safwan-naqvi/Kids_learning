@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     tools:context=".Activities.VideoLearning.VideoPlayActivity">
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+    <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youTubePlayerView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -26,6 +26,17 @@
             android:background="@drawable/bottom_borrder"
             android:paddingTop="6dp"
             android:paddingBottom="6dp">
+
+            <ImageView
+                android:id="@+id/gotoBackActivity"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:elevation="6dp"
+                android:onClick="onClickBack"
+                android:src="@drawable/ic_backarrow"
+                />
+
 
             <TextView
                 android:id="@+id/videoTitleOfVideo"

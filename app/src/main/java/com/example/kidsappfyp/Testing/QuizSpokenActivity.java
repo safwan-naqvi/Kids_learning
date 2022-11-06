@@ -123,7 +123,7 @@ public class QuizSpokenActivity extends AppCompatActivity {
             binding.correctSpokenAnswer.setVisibility(View.VISIBLE);
             binding.correctSpokenAnswer.setText("Correct Answer: " + question.getAnswer());
         }else{
-            binding.correctSpokenAnswer.setVisibility(View.INVISIBLE);
+            binding.correctSpokenAnswer.setVisibility(View.GONE);
         }
     }
 
@@ -150,8 +150,8 @@ public class QuizSpokenActivity extends AppCompatActivity {
     }
 
     void reset() {
-        binding.animationViewQuizAnswer.setVisibility(View.INVISIBLE);
-        binding.correctSpokenAnswer.setVisibility(View.INVISIBLE);
+        binding.animationViewQuizAnswer.setVisibility(View.GONE);
+        binding.correctSpokenAnswer.setVisibility(View.GONE);
     }
 
     void checkAnswer(String answer) {

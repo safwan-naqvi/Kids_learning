@@ -9,34 +9,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.kidsappfyp.Constants.Constants;
 import com.example.kidsappfyp.HelperClasses.ModelVideo;
 import com.example.kidsappfyp.R;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+
 
 import java.util.ArrayList;
 
-public class VideoPlayActivity extends AppCompatActivity {
+public class VideoPlayActivity extends YouTubeBaseActivity {
 
     ArrayList<ModelVideo> arrOfVideoList;
     YouTubePlayerView youTubePlayerView;
@@ -44,6 +37,7 @@ public class VideoPlayActivity extends AppCompatActivity {
     TextView videoTitleOfVideo;
     RecyclerView rvVideoList;
     Context context;
+    public String API = "AIzaSyACdEdup8o9LKXHTm-yq3MBMuWt82SMCZI";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +54,6 @@ public class VideoPlayActivity extends AppCompatActivity {
     private void initDefine() {
         rvVideoList = findViewById(R.id.rvVideoList);
         youTubePlayerView = findViewById(R.id.youTubePlayerView);
-        getLifecycle().addObserver(youTubePlayerView);
         videoTitleOfVideo = findViewById(R.id.videoTitleOfVideo);
         Intent intent = getIntent();
         arrOfVideoList = (ArrayList<ModelVideo>) intent.getSerializableExtra("ArrayOfVideo");
@@ -69,16 +62,24 @@ public class VideoPlayActivity extends AppCompatActivity {
     }
 
     private void initVideoPlayer() {
-        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+        YouTubePlayer.OnInitializedListener listener = new YouTubePlayer.OnInitializedListener() {
             @Override
-            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 String videoId = Constants.VIDEO_ID;
-                DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, youTubePlayer);
-                youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
-                youTubePlayer.loadVideo(videoId, 0);
+                youTubePlayer.loadVideo(videoId);
                 videoTitleOfVideo.setText(arrOfVideoList.get(POSITION).getVideoTitle());
+                youTubePlayer.play();
             }
-        });
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                Toast.makeText(VideoPlayActivity.this, "Initialization Failed" +youTubeInitializationResult, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+
+
+        youTubePlayerView.initialize(API, listener);
     }
 
     public void onClickBack(View view) {
@@ -88,6 +89,5 @@ public class VideoPlayActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        youTubePlayerView.release();
     }
 }

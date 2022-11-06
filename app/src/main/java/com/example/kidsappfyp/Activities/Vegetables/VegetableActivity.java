@@ -103,6 +103,7 @@ public class VegetableActivity extends AppCompatActivity {
     }
 
     public void onClickBack(View view) {
+        finish();
     }
 
     private void initList() {

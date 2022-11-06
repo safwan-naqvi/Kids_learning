@@ -3,7 +3,210 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#FDD263"
     android:layout_height="match_parent"
     tools:context=".Activities.ProfileActivity">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="@dimen/_600sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@drawable/wave"
+        android:backgroundTint="#ECA426"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+
+    <ImageView
+        android:id="@+id/goBackToUserActivity4"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_backarrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:elevation="8dp"
+        android:fontFamily="@font/avenir_black"
+        android:text="Edit Profile"
+        android:textColor="@color/colorBlack"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/goBackToUserActivity4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/goBackToUserActivity4" />
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/userEditProfileImage"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:elevation="6dp"
+        android:layout_marginBottom="-30dp"
+        android:src="@drawable/avtaaar"
+        app:layout_constraintTop_toBottomOf="@+id/goBackToUserActivity4"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/upload_user_image_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Profile"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/_10sdp"
+        android:textSize="@dimen/_16sdp"
+        android:textAlignment="center"
+        android:fontFamily="@font/avenir_black"
+        app:layout_constraintEnd_toEndOf="@+id/userEditProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/userEditProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/userEditProfileImage" />
+
+    <TextView
+        android:id="@+id/user_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Profile"
+        android:textStyle="bold"
+        android:alpha="0.7"
+        android:textColor="@color/colorBG"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
+        android:textAlignment="center"
+        android:fontFamily="@font/avenir"
+        app:layout_constraintEnd_toEndOf="@+id/upload_user_image_tv"
+        app:layout_constraintStart_toStartOf="@+id/upload_user_image_tv"
+        app:layout_constraintTop_toBottomOf="@+id/upload_user_image_tv" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_user_profile_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/upload_user_image_tv"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter Your Name"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_email_tv"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/avenir"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/user_update_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_corner"
+        android:backgroundTint="#FF9800"
+        android:clickable="true"
+        android:elevation="3dp"
+        android:fontFamily="@font/avenir"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="24dp"
+        android:text="Save profile"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/lottieAnimationView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_user_profile_name" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/admin_saving_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#B212C2E1"
+        android:elevation="8dp"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/windmill_loader" />
+
+
+        <TextView
+            android:id="@+id/sv_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/avenir"
+            android:text="Saving Product"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/progress_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:fontFamily="@font/avenir_black"
+            android:textColor="@color/white"
+            android:text="20%"
+            android:visibility="invisible"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/sv_et"
+            app:layout_constraintEnd_toEndOf="@+id/sv_et"
+            app:layout_constraintStart_toStartOf="@+id/sv_et" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView7"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_rawRes="@raw/windmill_loader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

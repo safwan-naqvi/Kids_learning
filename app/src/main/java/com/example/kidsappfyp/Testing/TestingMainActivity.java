@@ -2,9 +2,12 @@ package com.example.kidsappfyp.Testing;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -45,13 +48,13 @@ public class TestingMainActivity extends AppCompatActivity {
 
         ArrayList<CategoryModel> categoryModels = new ArrayList<>();
 
-        CategoryAdapter adapter = new CategoryAdapter(this,categoryModels);
+        CategoryAdapter adapter = new CategoryAdapter(this, categoryModels);
 
         database.collection("categories")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        for(DocumentSnapshot snapshot:value.getDocuments()){
+                        for (DocumentSnapshot snapshot : value.getDocuments()) {
                             CategoryModel model = snapshot.toObject(CategoryModel.class);
                             model.setCategoryId(snapshot.getId());
                             categoryModels.add(model);
@@ -59,9 +62,14 @@ public class TestingMainActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 });
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content, new HomeTestFragment());
+        if (getIntent().getBooleanExtra("nav_leaderboard", false)) {
+            transaction.replace(R.id.content, new LeaderBoardFragment());
+            binding.bottomBar.setItemActiveIndex(1);
+        } else {
+            transaction.replace(R.id.content, new HomeTestFragment());
+            binding.bottomBar.setItemActiveIndex(0);
+        }
         transaction.commit();
 
         binding.bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -97,7 +105,7 @@ public class TestingMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.wallet) {
+        if (item.getItemId() == R.id.wallet) {
             Toast.makeText(this, "wallet is clicked.", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
@@ -105,6 +113,18 @@ public class TestingMainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Closing Activity")
+                .setMessage("Are you sure you want to close this activity?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

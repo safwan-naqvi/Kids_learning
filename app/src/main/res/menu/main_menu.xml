@@ -8,6 +8,10 @@
             android:icon="@drawable/homei"
             android:title="Home" />
         <item
+            android:id="@+id/nav_testing"
+            android:icon="@drawable/trophy"
+            android:title="Testing" />
+        <item
             android:id="@+id/nav_leaderboard"
             android:icon="@drawable/leaderboard"
             android:title="Leaderboard" />
@@ -52,7 +56,6 @@
                 android:id="@+id/nav_about_us"
                 android:icon="@drawable/about"
                 android:title="About Us" />
-
 
         </menu>
 

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class HomeTestFragment extends Fragment {
 
+
     public HomeTestFragment() {
         // Required empty public constructor
     }
@@ -33,12 +34,15 @@ public class HomeTestFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     FragmentHomeTestBinding binding;
     FirebaseFirestore database;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeTestBinding.inflate(inflater, container, false);
+
 
         database = FirebaseFirestore.getInstance();
 
