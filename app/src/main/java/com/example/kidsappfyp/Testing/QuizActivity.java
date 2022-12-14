@@ -3,6 +3,7 @@ package com.example.kidsappfyp.Testing;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -26,13 +27,13 @@ import java.util.Random;
 public class QuizActivity extends AppCompatActivity {
 
     ActivityQuizBinding binding;
-
+    private MediaPlayer mediaPlayer;
     ArrayList<Question> questions;
-    int index = 0;
     Question question;
+    int index = 0;
+    int correctAnswers = 0;
     CountDownTimer timer;
     FirebaseFirestore database;
-    int correctAnswers = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,58 +41,51 @@ public class QuizActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mediaPlayer = MediaPlayer.create(this, R.raw.wrong_answer);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setVolume(1, 1);
         questions = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
 
         final String catId = getIntent().getStringExtra("catId");
 
         Random random = new Random();
-        final int rand = random.nextInt(12);
+        final int rand = random.nextInt(10);
 
         database.collection("categories")
                 .document(catId)
                 .collection("questions")
-                .whereGreaterThanOrEqualTo("index", rand)
+                .whereGreaterThanOrEqualTo("index", 0)
                 .orderBy("index")
-                .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (queryDocumentSnapshots.getDocuments().size() < 5) {
-                            database.collection("categories")
-                                    .document(catId)
-                                    .collection("questions")
-                                    .whereLessThanOrEqualTo("index", rand)
-                                    .orderBy("index")
-                                    .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                            for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                                                Question question = snapshot.toObject(Question.class);
-                                                questions.add(question);
-                                            }
-                                            setNextQuestion();
-                                        }
-                                    });
-                        } else {
-                            for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                                Question question = snapshot.toObject(Question.class);
-                                questions.add(question);
-                            }
-                            setNextQuestion();
+                .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (queryDocumentSnapshots.getDocuments().size() < 5) {
+                        database.collection("categories")
+                                .document(catId)
+                                .collection("questions")
+                                .whereLessThanOrEqualTo("index", rand)
+                                .orderBy("index")
+                                .limit(5).get().addOnSuccessListener(queryDocumentSnapshots1 -> {
+                                    for (DocumentSnapshot snapshot : queryDocumentSnapshots1) {
+                                        Question question = snapshot.toObject(Question.class);
+                                        questions.add(question);
+                                    }
+                                    setNextQuestion();
+                                });
+                    } else {
+                        for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                            Question question = snapshot.toObject(Question.class);
+                            questions.add(question);
                         }
+                        setNextQuestion();
                     }
                 });
 
 
         resetTimer();
 
-        binding.quizBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(QuizActivity.this, TestingMainActivity.class));
-                finish();
-            }
+        binding.quizBtn.setOnClickListener(view -> {
+            startActivity(new Intent(QuizActivity.this, TestingMainActivity.class));
+            finish();
         });
 
     }
@@ -154,27 +148,34 @@ public class QuizActivity extends AppCompatActivity {
         String selectedAnswer = textView.getText().toString();
         if (selectedAnswer.equals(question.getAnswer())) {
             correctAnswers++;
+            mediaPlayer = MediaPlayer.create(this, R.raw.correct_answer);
             textView.setBackground(getResources().getDrawable(R.drawable.option_right));
         } else {
             showAnswer();
+            mediaPlayer = MediaPlayer.create(this, R.raw.wrong_answer);
             textView.setBackground(getResources().getDrawable(R.drawable.option_wrong));
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (index < questions.size()) {
-                    index++;
-                    reset();
-                    setNextQuestion();
-                } else {
-                    Intent intent = new Intent(QuizActivity.this, ResultsActivity.class);
-                    intent.putExtra("correct", correctAnswers);
-                    intent.putExtra("total", questions.size());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(QuizActivity.this, "Quiz Finished.", Toast.LENGTH_SHORT).show();
-                }
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setVolume(1, 1);
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        } else {
+            mediaPlayer.stop();
+            mediaPlayer.start();
+        }
+        new Handler().postDelayed(() -> {
+            if (index < questions.size()) {
+                index++;
+                reset();
+                setNextQuestion();
+            } else {
+                Intent intent = new Intent(QuizActivity.this, ResultsActivity.class);
+                intent.putExtra("correct", correctAnswers);
+                intent.putExtra("total", questions.size());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+                Toast.makeText(QuizActivity.this, "Quiz Finished.", Toast.LENGTH_SHORT).show();
             }
         }, 1500);
 
@@ -225,4 +226,5 @@ public class QuizActivity extends AppCompatActivity {
         super.onDestroy();
         timer.cancel();
     }
+
 }

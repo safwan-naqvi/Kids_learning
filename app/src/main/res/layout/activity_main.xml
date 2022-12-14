@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/glacial"
-            android:text="NAQVI HASH STUDIOS"
+            android:text="Let's Learn Together"
             android:textAllCaps="true"
             android:textColor="@color/colorText"
             android:textSize="20sp" />

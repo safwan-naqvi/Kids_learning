@@ -4,8 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
+    <uses-permission android:name="android.permission.CAMERA"/>
     <queries>
         <intent>
             <action android:name="com.google.android.youtube.api.service.START" />
@@ -20,6 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KidsAppFYP">
+        <activity
+            android:name=".Activities.ML.HandGestureActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Activities.ProfileActivity"
             android:exported="false">

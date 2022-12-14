@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAEFE7"
+    android:background="#FDB58E"
     tools:context=".Intro.SelectionActivity">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -24,10 +24,11 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView65"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
         android:elevation="@dimen/_2sdp"
-        app:layout_constraintBottom_toTopOf="@+id/testing"
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView8"
+        app:layout_constraintBottom_toTopOf="@+id/animShape"
         app:layout_constraintEnd_toEndOf="@+id/learning"
         app:layout_constraintStart_toStartOf="@+id/testing"
         app:lottie_autoPlay="true"
@@ -97,6 +98,7 @@
         app:lottie_rawRes="@raw/shape" />
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animShape"
         android:layout_width="@dimen/_90sdp"
         android:layout_height="@dimen/_90sdp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,32 +113,29 @@
 
     <Button
         android:id="@+id/testing"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
         android:background="@drawable/round_box"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Testing"
+        android:text="Take a Test"
         android:textSize="@dimen/_16sdp"
+        android:padding="@dimen/_16sdp"
         android:fontFamily="@font/crayone"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView65" />
     <Button
         android:id="@+id/learning"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        android:background="@drawable/round_box_inverted"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_box"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="@dimen/_16sdp"
         android:fontFamily="@font/crayone"
-        android:text="Training"
-        app:layout_constraintHorizontal_bias="0.73"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        android:text="prepare for test"
+        android:padding="@dimen/_16sdp"
+        app:layout_constraintBottom_toTopOf="@+id/lottieAnimationView65"
+        />
 
 
 

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.kidsappfyp.Activities.ML.HandGestureActivity;
 import com.example.kidsappfyp.R;
 
 import java.util.ArrayList;
@@ -51,7 +52,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     intent.putExtra("catId", model.getCategoryId());
                     context.startActivity(intent);
                 }else if(model.getCategoryId().equals("ds43SSeIZCm5ihhy0Ye9")){
-                    Toast.makeText(context, "I will Open Hand Gesture Test", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(context, HandGestureActivity.class);
+                    intent.putExtra("catId", model.getCategoryId());
+                    context.startActivity(intent);
                 }else{
                     intent = new Intent(context, QuizActivity.class);
                     intent.putExtra("catId", model.getCategoryId());

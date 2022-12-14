@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -37,6 +38,8 @@ public class QuizSpokenActivity extends AppCompatActivity {
     FirebaseFirestore database;
     int correctAnswers = 0;
     String answerSpoken;
+    private MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,9 @@ public class QuizSpokenActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityQuizSpokenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mediaPlayer = MediaPlayer.create(this, R.raw.wrong_answer);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setVolume(1, 1);
         questions = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
 
@@ -58,7 +63,7 @@ public class QuizSpokenActivity extends AppCompatActivity {
                 .collection("questions")
                 .whereGreaterThanOrEqualTo("index", rand)
                 .orderBy("index")
-                .limit(5).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (queryDocumentSnapshots.getDocuments().size() < 5) {
@@ -122,7 +127,7 @@ public class QuizSpokenActivity extends AppCompatActivity {
         if (!question.getAnswer().equals(answerSpoken)) {
             binding.correctSpokenAnswer.setVisibility(View.VISIBLE);
             binding.correctSpokenAnswer.setText("Correct Answer: " + question.getAnswer());
-        }else{
+        } else {
             binding.correctSpokenAnswer.setVisibility(View.GONE);
         }
     }
@@ -159,9 +164,19 @@ public class QuizSpokenActivity extends AppCompatActivity {
         if (answer.equals(question.getAnswer())) {
             correctAnswers++;
             binding.animationViewQuizAnswer.setAnimation(R.raw.correct);
+            mediaPlayer = MediaPlayer.create(this, R.raw.correct_answer);
         } else {
             showAnswer();
             binding.animationViewQuizAnswer.setAnimation(R.raw.wrong);
+            mediaPlayer = MediaPlayer.create(this, R.raw.wrong_answer);
+        }
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setVolume(1, 1);
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        } else {
+            mediaPlayer.stop();
+            mediaPlayer.start();
         }
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -181,7 +196,6 @@ public class QuizSpokenActivity extends AppCompatActivity {
                 }
             }
         }, 2500);
-
     }
 
     public void onClick(View view) {
@@ -210,6 +224,7 @@ public class QuizSpokenActivity extends AppCompatActivity {
                 break;
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
